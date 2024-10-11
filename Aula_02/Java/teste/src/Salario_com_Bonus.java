@@ -11,6 +11,7 @@ public class Salario_com_Bonus {
         double a = scanner.nextDouble();
         double b = scanner.nextDouble();
 
+        nome = nome + "ignore";
         System.out.println("TOTAL = R$"+(a+b*0.15));
 
         scanner.close();
