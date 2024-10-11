@@ -1,7 +1,7 @@
 import java.util.Locale;
 import java.util.Scanner;
 
-public class App {
+public class Salario_com_Bonus {
     public static void main(String[] args){
 
         Locale.setDefault(Locale.US);
