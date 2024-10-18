@@ -1,18 +1,7 @@
+package primeiro;
 import java.util.Scanner;
 
-public class primeiro {
-
-    public static class Circulo {
-        double r = 0;
-
-        Circulo (double r){
-            this.r = r;
-        }
-
-        double Calc_area (){
-            return 3.14 * r * r;
-        }
-    }
+public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -20,7 +9,7 @@ public class primeiro {
         double valor = sc.nextDouble();
 
         Circulo c = new Circulo(valor);
-        System.out.println("Area = " + (c.Calc_area()));
+        System.out.println("Area = " + (c.calcularArea()));
 
         sc.close();
     }
