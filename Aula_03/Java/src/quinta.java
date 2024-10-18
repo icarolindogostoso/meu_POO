@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class quinta {
 
-    public static String iniciais(String[] nome){
+    public static String iniciais(String nome){
         String novo_nome = "";
         boolean novapalavra = true;
 
