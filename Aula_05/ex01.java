@@ -43,13 +43,13 @@ public class ex01{
 
         Triangulo x = new Triangulo();
 
-        System.out.println("Informe o valor da base do triangulo: ");
+        System.out.print("Informe o valor da base do triangulo: ");
         x.setBase(sc.nextDouble());
 
-        System.out.println("Informe o valor da altura do triangulo: ");
+        System.out.print("Informe o valor da altura do triangulo: ");
         x.setAltura(sc.nextDouble());
 
-        System.out.println("Base = " + (x.getBase()) + "Altura = " + (x.getAltura()));
+        System.out.println("Base = " + (x.getBase()) + " Altura = " + (x.getAltura()));
 
         System.out.println("Area = " + (x.calcArea()));
 
