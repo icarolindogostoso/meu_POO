@@ -48,12 +48,18 @@ class Cliente:
         self.__socio = cliente
         self.__limite = self.__limite + cliente.__limite
 
+    def getNome (self):
+        return self.__nome
+    
+    def getCpf (self):
+        return self.__cpf
+
     def getLimite (self):
         return self.__limite
     
     def __str__ (self):
         socio = f"e socio = {self.__socio}" if (self.__socio != None) else ""
-        return f"Cliente {self.__nome}, com cpf {self.__cpf} {socio}"
+        return f"Cliente {self.__nome}, com cpf {self.__cpf} e limite {self.__limite} {socio}"
     
 
 class UI:
@@ -73,17 +79,21 @@ class UI:
             if op == 2:
                 if empresa == None:
                     print("Nenhuma empresa criada!")
+                    print('')
                 else:
                     UI.inserir_cliente(empresa)
             if op == 3:
                 if empresa == None:
                     print("Nenhuma empresa criada!")
+                    print('')
                 else:
                     UI.listar_clientes(empresa)
 
     @staticmethod
     def nova_empresa():
+        print('')
         nome = input("Informe o nome da empresa: ")
+        print('')
         empresa = Empresa(nome)
         return empresa
 
@@ -92,7 +102,11 @@ class UI:
         nome = input("Informe o nome do cliente: ")
         cpf = input("Informe o cpf do cliente: ")
         limite = float(input("Informe o limite do cliente: "))
+        print('')
         cliente = Cliente(nome,cpf,limite)
+
+        UI.main_socio(cliente, empresa)
+
         empresa.inserir(cliente)
 
     @staticmethod
@@ -100,5 +114,29 @@ class UI:
         print(empresa)
         for cliente in empresa.listar():
             print(cliente)
+        print('')
+
+    @staticmethod
+    def menu_socio ():
+        print("1 - Inserir socio, 2 - Sem socio")
+        return int(input("Informe sua opção: "))
+
+    @staticmethod
+    def main_socio (cliente, empresa):
+        op = UI.menu_socio()
+        if op == 1:
+            cpf = input("Informe o cpf do socio: ")
+            print('')
+            UI.inserir_socio(cliente, empresa, cpf)
+
+    @staticmethod
+    def inserir_socio (cliente, empresa, cpf):
+        for clientes in empresa.listar():
+            if clientes.getCpf() == cpf:
+                cliente.setSocio(clientes)
+                break
+            else:
+                print("Cliente não registrado")
+                print('')
 
 UI.main()
