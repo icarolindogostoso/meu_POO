@@ -27,8 +27,9 @@ class Paciente:
 
     def idade(self):
         hoje = datetime.today()
-        idade = hoje - self.__nascimento
-        return idade
+        idade_ano = hoje.year - self.__nascimento.year
+        idade_mes = hoje.month - self.__nascimento.month
+        return f"{idade_ano} anos e {idade_mes} meses"
     
     def __str__ (self):
-        return f"{self.__nome} - {self.__cpf} - {self.__telefone} - {self.__nascimento}"
+        return f"{self.__nome} - {self.__cpf} - {self.__telefone} - {self.__nascimento.date()}"
