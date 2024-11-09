@@ -31,6 +31,18 @@ class Cliente:
         else:
             raise ValueError ("Nome invalido")
         
+    def getId (self):
+        return self.__id
+    
+    def getNome (self):
+        return self.__nome
+    
+    def getEmail (self):
+        return self.__email
+    
+    def getFone (self):
+        return self.__nome
+        
     def __str__ (self):
         return f"{self.__id} - {self.__nome} - {self.__email} - {self.__fone}"
         
@@ -48,21 +60,19 @@ class Clientes:
     @classmethod
     def listarId(cls, id):
         for cliente in cls.objetos:
-            if cliente.__id == id:
+            if cliente.getId() == id:
                 return cliente
     
     @classmethod
     def atualizar (cls, obj):
-        for cliente in cls.objetos:
-            if cliente.__id == obj.__id:
-                cliente.__nome = obj.__nome
-                cliente.__email = obj.__email
-                cliente.__fone = obj.__fone
+        for i, cliente in enumerate(cls.objetos):
+            if cliente.getId() == obj.getId():
+                cls.objetos[i] = obj
 
     @classmethod
     def excluir (cls, obj):
-        for i, cliente in cls.objetos:
-            if cliente.__id == obj.__id:
+        for i, cliente in enumerate(cls.objetos):
+            if cliente.getId() == obj.getId():
                 del cls.objetos[i]
 
     @classmethod
@@ -73,7 +83,7 @@ class Clientes:
             for obj in clientes_json:
                 c = Cliente(obj["id"], obj["nome"], obj["email"], obj["fone"])
                 cls.objetos.append(c)
-                
+
     @classmethod
     def salvar(cls):
         with open("Aula_09/clientes.json", mode="w") as arquivo:
