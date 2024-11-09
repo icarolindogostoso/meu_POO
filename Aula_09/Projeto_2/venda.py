@@ -59,13 +59,13 @@ class Vendas:
     @classmethod
     def abrir(cls):
         cls.objetos = []
-        with open("Aula_09/clientes.json", mode="r") as arquivo:
+        with open("Aula_09/Projeto_2/vendas.json", mode="r") as arquivo:
             clientes_json = json.load(arquivo)
             for obj in clientes_json:
-                c = Venda(obj["id"], obj["nome"], obj["email"], obj["fone"])
+                c = Venda(obj["id"])
                 cls.objetos.append(c)
 
     @classmethod
     def salvar(cls):
-        with open("Aula_09/clientes.json", mode="w") as arquivo:
+        with open("Aula_09/Projeto_2/vendas.json", mode="w") as arquivo:
             json.dump(cls.objetos, arquivo, default = vars)
