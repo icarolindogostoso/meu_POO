@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 import math
 
 a = datetime(2023, 6 ,1)
