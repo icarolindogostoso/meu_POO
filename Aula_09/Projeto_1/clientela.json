@@ -1,1 +1,26 @@
-[{"id": 1, "nome": "icaro", "email": "icaro", "fone": "132"}, {"id": 2, "nome": "gustavo", "email": "gustavo", "fone": "321"}, {"id": 3, "nome": "isadorapinto", "email": "isadorapinto", "fone": "654"}, {"id": 4, "nome": "flavio", "email": "flavio", "fone": "465"}]
+[
+    {
+        "id": 1, 
+        "nome": "icaro", 
+        "email": "icaro", 
+        "fone": "132"
+    }, 
+    {
+        "id": 2, 
+        "nome": "gustavo", 
+        "email": "gustavo", 
+        "fone": "321"
+    }, 
+    {
+        "id": 3, 
+        "nome": "isadorapinto", 
+        "email": "isadorapinto", 
+        "fone": "654"
+    }, 
+    {
+        "id": 4, 
+        "nome": "flavio", 
+        "email": "flavio", 
+        "fone": "465"
+    }
+]

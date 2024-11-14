@@ -69,4 +69,3 @@ class Clientes:
                     cls.objetos.append(c)
         except FileNotFoundError:
             pass
-
