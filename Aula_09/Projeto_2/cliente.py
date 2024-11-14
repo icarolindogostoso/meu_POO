@@ -51,40 +51,61 @@ class Clientes:
 
     @classmethod
     def inserir(cls, obj):
+        cls.abrir()
+
+        id = 0
+        for cliente in cls.objetos:
+            if cliente.getId() > id:
+                id = cliente.getId()
+        obj.setId(id + 1)
+
         cls.objetos.append(obj)
+
+        cls.salvar()
 
     @classmethod
     def listar(cls):
+        cls.abrir()
         return cls.objetos
     
     @classmethod
     def listarId(cls, id):
+        cls.abrir()
+
         for cliente in cls.objetos:
             if cliente.getId() == id:
                 return cliente
+        return None
     
     @classmethod
     def atualizar (cls, obj):
-        for i, cliente in enumerate(cls.objetos):
-            if cliente.getId() == obj.getId():
-                cls.objetos[i] = obj
+        cliente = cls.listarId(obj.getId())
+        if cliente != None:
+            cliente.setNome(obj.getNome())
+            cliente.setEmail(obj.getEmail())
+            cliente.setFone(obj.getFone())
+        cls.salvar()
 
     @classmethod
     def excluir (cls, obj):
-        for i, cliente in enumerate(cls.objetos):
-            if cliente.getId() == obj.getId():
-                del cls.objetos[i]
+        cliente = cls.listarId(obj.getId())
+        if cliente != None:
+            cls.objetos.remove(cliente)
+            cls.salvar()
 
     @classmethod
     def abrir(cls):
         cls.objetos = []
-        with open("Aula_09/clientes.json", mode="r") as arquivo:
-            clientes_json = json.load(arquivo)
-            for obj in clientes_json:
-                c = Cliente(obj["id"], obj["nome"], obj["email"], obj["fone"])
-                cls.objetos.append(c)
+        try:
+            with open("Aula_09/Projeto_2/clientoes.json", mode="r") as arquivo:
+                clientes_json = json.load(arquivo)
+                for obj in clientes_json:
+                    c = Cliente(obj["id"], obj["nome"], obj["email"], obj["fone"])
+                    cls.objetos.append(c)
+        except FileNotFoundError:
+            pass
 
     @classmethod
     def salvar(cls):
-        with open("Aula_09/clientes.json", mode="w") as arquivo:
+        with open("Aula_09/Projeto_2/clientoes.json", mode="w") as arquivo:
             json.dump(cls.objetos, arquivo, default = vars)
