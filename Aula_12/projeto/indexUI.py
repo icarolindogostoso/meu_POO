@@ -5,3 +5,5 @@ class IndexUI:
     @staticmethod
     def main():
         ManterClienteUI.main()
+
+IndexUI.main()
