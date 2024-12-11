@@ -1,39 +1,26 @@
+from os import stat
 from models.clientes import Cliente, Clientes
 from models.categorias import Categoria, Categorias
 from models.produtos import Produto, Produtos
 
 class View:
     @staticmethod
-    def clienteAdmin():
-        for c in Clientes.listar():
-            if c.email == "admin":
-                return None
-        View.clienteInserir("admin", "admin", "0000", "1234")
-
-    @staticmethod
-    def clienteAutenticar(email, senha):
-        for c in Clientes.listar():
-            if c.email == email and c.senha == senha:
-                return {"clienteId" : c.id, "clienteNome" : c.nome}
-        return None
-
-    @staticmethod
     def clienteListar():
         return Clientes.listar()
     
     @staticmethod
-    def clienteInserir(nome, email, fone, senha):
-        c = Cliente(0, nome, email, fone, senha)
+    def clienteInserir(nome, email, fone):
+        c = Cliente(0, nome, email, fone)
         Clientes.inserir(c)
 
     @staticmethod
-    def clienteAtualizar(id, nome, email, fone, senha):
-        c = Cliente(id, nome, email, fone, senha)
+    def clienteAtualizar(id, nome, email, fone):
+        c = Cliente(id, nome, email, fone)
         Clientes.atualizar(c)
     
     @staticmethod
     def clienteExcluir(id):
-        c = Cliente(id, "", "", "", "")
+        c = Cliente(id, "", "", "")
         Clientes.excluir(c)
 
     @staticmethod

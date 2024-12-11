@@ -1,9 +1,7 @@
+from os import ttyname
 from view import View
 
 class UI:
-    clienteId = 0
-    clienteNome = ""
-
     @staticmethod
     def menu():
         print("\nCadastro de Clientes")
@@ -13,15 +11,10 @@ class UI:
         print("\nCadastro de Produtos")
         print(" 9 - Inserir, 10 - Listar, 11 - Atualizar, 12 - Excluir, 13 - Reajustar")
         print(" 99 - Fim")
-        print("Menu do Visitante")
-        print("14 - Abrir conta, 15 - Entrar no Sistema")
         return int(input("Informe uma opção: "))
 
     @staticmethod
     def main():
-
-        View.clienteAdmin()
-
         op = 0
         while op != 99:
             op = UI.menu()
@@ -54,34 +47,12 @@ class UI:
             if op == 13:
                 UI.produtoReajustar()
 
-            if op == 14:
-                UI.visitanteAbrirConta()
-            if op == 15:
-                UI.visitanteEntrarNoSistema()
-
-    @staticmethod
-    def visitanteAbrirConta():
-        UI.clienteInserir()
-
-    @classmethod
-    def visitanteEntrarNoSistema(cls):
-        email = input("Informe o email: ")
-        senha = input("Informe a senha: ")
-        obj = View.clienteAutenticar(email, senha)
-        if obj == None:
-            print("Email ou senha invalidos")
-        else:
-            cls.clienteId = obj["clienteId"]
-            cls.clienteNome = obj["clienteNome"]
-            print("Bem-vindo(a),", cls.clienteNome)
-
     @staticmethod
     def clienteInserir():
         nome = input("Infome o nome: ")
         email = input("Informe o email: ")
         fone = input("Informe o fone: ")
-        senha = input("Informe a senha: ")
-        View.clienteInserir(nome, email, fone, senha)
+        View.clienteInserir(nome, email, fone)
 
     @staticmethod
     def clienteListar():
@@ -99,8 +70,7 @@ class UI:
         nome = input("Informe o novo nome: ")
         email = input("Informe o novo email: ")
         fone = input("Informe o novo fone: ")
-        senha = input("Informe a nova senha: ")
-        View.clienteAtualizar(id, nome, email, fone, senha)
+        View.clienteAtualizar(id, nome, email, fone)
 
     @staticmethod
     def clienteExcluir():
