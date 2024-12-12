@@ -36,6 +36,7 @@ class IndexUI:
             VisualizarPedidosUI.main()
 
     def menuCliente():
+        View.vendaInserir(True, 0, st.session_state["clienteId"])
         op = st.sidebar.selectbox("Menu", ["Listar Produtos", "Adicionar Produto no Carrinho", "Fechar Pedido", "Ver Meus Pedidos"])
         if op == "Listar Produtos":
             ListarProdutosUI.main()
@@ -48,6 +49,7 @@ class IndexUI:
 
     def sairDoSistema():
         if st.sidebar.button("Sair"):
+            View.vendaFechar(st.session_state["clienteId"])
             del st.session_state["clienteId"]
             del st.session_state["clienteNome"]
             st.rerun()

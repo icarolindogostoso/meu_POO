@@ -1,6 +1,7 @@
 from models.clientes import Cliente, Clientes
 from models.categorias import Categoria, Categorias
 from models.produtos import Produto, Produtos
+from models.vendas import Venda, Vendas
 
 class View:
     @staticmethod
@@ -82,3 +83,26 @@ class View:
     def produtoReajustar(percentual):
         for obj in View.produtoListar():
             View.produtoAtualizar(obj.id, obj.descricao, obj.preco * (1 + percentual), obj.estoque, obj.id_categoria)
+
+    @staticmethod
+    def vendaInserir(carrinho, total, id_cliente):
+        ativo = False
+        for venda in Vendas.listar():
+            if venda.getIdCliente() == id_cliente and venda.getCarrinho() == True:
+                ativo = True
+                break
+        if ativo == False:
+            v = Venda(0, None, carrinho, total, id_cliente)
+            Vendas.inserir(v)
+
+    @staticmethod
+    def vendaFechar(id_cliente):
+        for venda in Vendas.listar():
+            if venda.getIdCliente() == id_cliente and venda.getCarrinho() == True:
+                id = venda.getId()
+                carrinho = False
+                total = venda.getTotal()
+                id_cliente = venda.getIdCliente()
+                data = venda.getData()
+                v = Venda(id, data, carrinho, total, id_cliente)
+                Vendas.atualizar(v)

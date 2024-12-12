@@ -2,39 +2,47 @@ import json
 from datetime import datetime
 
 class Venda:
-    def __init__ (self, id):
+    def __init__ (self, id, d, c, t, i):
         self.setId(id)
-        self.setData()
-        self.setCarrinho()
-        self.setTotal()
-        self.setIdCliente()
+        self.setData(d)
+        self.setCarrinho(c)
+        self.setTotal(t)
+        self.setIdCliente(i)
 
     def setId (self, id):
-        if id > 0:
+        if id >= 0:
             self.__id = id
         else:
             raise ValueError ("Id invalido")
     
-    def setData (self, data = None):
-        if data == None:
-            self.__data = datetime.today()
-        else:
+    def setData (self, data):
+        if data != None:
             self.__data = data
+        else:
+            dia = datetime.today()
+            self.__data = dia.isoformat()
 
-    def setCarrinho (self):
-        self.__carrinho = False
 
-    def setTotal (self):
-        self.__total = 0.0
+    def setCarrinho (self, carrinho):
+        if type(carrinho) == bool:
+            self.__carrinho = carrinho
+        else:
+            raise ValueError ("Carrinho invalido")
 
-    def setIdCliente (self):
-        self.__idCliente = 0
+    def setTotal (self, total):
+        if total >= 0:
+            self.__total = total
+        else:
+            raise ValueError ("Total invalido")
+
+    def setIdCliente (self, idCliente):
+        self.__idCliente = idCliente
 
     def getId(self):
         return self.__id
 
     def getData(self):
-        return self.__data.date()
+        return self.__data
 
     def getCarrinho (self):
         return self.__carrinho
@@ -46,7 +54,7 @@ class Venda:
         return self.__idCliente
         
     def __str__ (self):
-        return f"{self.__id} - {self.__data.date()} - {self.__carrinho} - {self.__total} - {self.__idCliente}"
+        return f"{self.__id} - {self.__data} - {self.__carrinho} - {self.__total} - {self.__idCliente}"
     
 class Vendas:
     objetos = []
@@ -82,10 +90,10 @@ class Vendas:
     def atualizar (cls, obj):
         venda = cls.listarId(obj.getId())
         if venda != None:
-            venda.setData(cls.getData())
-            venda.setCarrinho()
-            venda.setTotal()
-            venda.setIdCliente()
+            venda.setData(obj.getData())
+            venda.setCarrinho(obj.getCarrinho())
+            venda.setTotal(obj.getTotal())
+            venda.setIdCliente(obj.getIdCliente())
             cls.salvar()
 
     @classmethod
@@ -99,15 +107,15 @@ class Vendas:
     def abrir(cls):
         cls.objetos = []
         try:
-            with open("Aula_09/Projeto_2/vendas.json", mode="r") as arquivo:
+            with open("vendas.json", mode="r") as arquivo:
                 clientes_json = json.load(arquivo)
                 for obj in clientes_json:
-                    c = Venda(obj["id"])
+                    c = Venda(obj["_Venda__id"], obj["_Venda__data"], obj["_Venda__carrinho"], obj["_Venda__total"], obj["_Venda__idCliente"])
                     cls.objetos.append(c)
         except FileNotFoundError:
             pass
 
     @classmethod
     def salvar(cls):
-        with open("Aula_09/Projeto_2/vendas.json", mode="w") as arquivo:
+        with open("vendas.json", mode="w") as arquivo:
             json.dump(cls.objetos, arquivo, default = vars)
