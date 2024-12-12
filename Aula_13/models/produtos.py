@@ -1,71 +1,119 @@
 import json
 
 class Produto:
-    def __init__ (self, id, descricao, preco, estoque, id_categoria):
-        self.id = id
-        self.descricao = descricao
-        self.preco = preco
-        self.estoque = estoque
-        self.id_categoria = id_categoria
+    def __init__ (self, id, d, p, e):
+        self.setId(id)
+        self.setDescricao(d)
+        self.setPreco(p)
+        self.setEstoque(e)
+        self.setIdCategoria()
+
+    def setId (self, id):
+        if id > 0:
+            self.__id = id
+        else:
+            raise ValueError ("Id invalido")
+        
+    def setDescricao (self, d):
+        if len(d) > 0:
+            self.__descricao = d
+        else:
+            raise ValueError ("Descricao invalida")
+        
+    def setPreco (self, p):
+        if p > 0:
+            self.__preco = p
+        else:
+            raise ValueError ("Preco invalido")
+        
+    def setEstoque (self, e):
+        if e > 0:
+            self.__estoque = e
+        else:
+            raise ValueError ("Estoque invalido")
+        
+    def setIdCategoria (self):
+        self.__idCategoria = 0
+
+    def getId (self):
+        return self.__id
+    
+    def getDescricao (self):
+        return self.__descricao
+    
+    def getPreco (self):
+        return self.__preco
+    
+    def getEstoque (self):
+        return self.__estoque
+    
+    def getIdCategoria (self):
+        return self.__idCategoria
 
     def __str__ (self):
-        return f"{self.id} - {self.descricao} - {self.estoque} - R${self.preco:.2f}"
-
+        return f"{self.__id} - {self.__descricao} - {self.__preco} - {self.__estoque} - {self.__idCategoria}"
+    
 class Produtos:
     objetos = []
 
     @classmethod
-    def inserir(cls, obj):
+    def inserir (cls, obj):
         cls.abrir()
+
         id = 0
-        for x in cls.objetos:
-            if x.id > id:
-                id = x.id
-        obj.id = id + 1
+        for produto in cls.objetos:
+            if produto.getId() > id:
+                id = produto.getId()
+        obj.setId(id + 1)
+
         cls.objetos.append(obj)
+
         cls.salvar()
 
     @classmethod
-    def listar(cls):
+    def listar (cls):
         cls.abrir()
         return cls.objetos
     
     @classmethod
-    def listar_id(cls, id):
+    def listarId (cls, id):
         cls.abrir()
-        for x in cls.objetos:
-            if x.id == id:
-                return x
-        return None
-    
-    @classmethod
-    def atualizar(cls, obj):
-        x = cls.listar_id(obj.id)
-        if x != None:
-            cls.objetos.remove(x)
-            cls.objetos.append(obj)
-        cls.salvar()
 
+        for produto in cls.objetos:
+                if produto.getId() == id:
+                    return produto
+        return None
+                
     @classmethod
-    def excluir(cls, obj):
-        x = cls.listar_id(obj.id)
-        if x != None:
-            cls.objetos.remove(x)
+    def atualizar (cls, obj):
+        produto = cls.listarId(obj.getId())
+        if produto != None:
+            produto.setDescricao(obj.getDescricao())
+            produto.setPreco(obj.getPreco())
+            produto.setEstoque(obj.getEstoque())
+            produto.setIdCategoria(obj.getIdCategoria())
             cls.salvar()
 
     @classmethod
-    def salvar(cls):
-        with open("produtos.json", mode="w") as arquivo:
-            json.dump(cls.objetos, arquivo, default = vars)
+    def excluir (cls, obj):
+        produto = cls.listarId(obj.getId())
+        if produto != None:
+            cls.objetos.remove(produto)
+            cls.salvar()
 
     @classmethod
     def abrir(cls):
         cls.objetos = []
         try:
-            with open("produtos.json", mode="r") as arquivo:
+            with open("Aula_09/Projeto_2/produtos.json", mode="r") as arquivo:
                 clientes_json = json.load(arquivo)
                 for obj in clientes_json:
-                    c = Produto(obj["id"], obj["descricao"], obj["preco"], obj["estoque"], obj["id_categoria"])
+                    c = Produto(obj["id"], obj["d"], obj["p"], obj["e"])
                     cls.objetos.append(c)
         except FileNotFoundError:
             pass
+
+    @classmethod
+    def salvar(cls):
+        with open("Aula_09/Projeto_2/produtos.json", mode="w") as arquivo:
+            json.dump(cls.objetos, arquivo, default = vars)

@@ -6,15 +6,15 @@ class View:
     @staticmethod
     def clienteAdmin():
         for c in Clientes.listar():
-            if c.email == "admin":
+            if c.getEmail() == "admin":
                 return None
         View.clienteInserir("admin", "admin", "0000", "1234")
 
     @staticmethod
     def clienteAutenticar(email, senha):
         for c in Clientes.listar():
-            if c.email == email and c.senha == senha:
-                return {"id" : c.id, "nome" : c.nome}
+            if c.getEmail() == email and c.getSenha() == senha:
+                return {"id" : c.getId(), "nome" : c.getNome()}
         return None
 
     @staticmethod

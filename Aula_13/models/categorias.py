@@ -1,68 +1,89 @@
 import json
 
 class Categoria:
-    def __init__ (self, id, descricao):
-        self.id = id
-        self.descricao = descricao
+    def __init__ (self, id, d):
+        self.setId(id)
+        self.setDescricao(d)
 
+    def setId (self, id):
+        if id > 0:
+            self.__id = id
+        else:
+            raise ValueError ("Id invalido")
+        
+    def setDescricao(self, d):
+        if len(d) > 0:
+            self.__descricao = d
+        else:
+            raise ValueError ("Descicao invalida")
+        
+    def getId (self):
+        return self.__id
+    
+    def getDescricao(self):
+        return self.__descricao
+        
     def __str__ (self):
-        return f"{self.id} - {self.descricao}"
-
+        return f"{self.__id} - {self.__descricao}"
+    
 class Categorias:
     objetos = []
 
     @classmethod
-    def inserir(cls, obj):
+    def inserir (cls, obj):
         cls.abrir()
+
         id = 0
-        for x in cls.objetos:
-            if x.id > id:
-                id = x.id
-        obj.id = id + 1
+        for categoria in cls.objetos:
+            if categoria.getId() > id:
+                id = categoria.getId()
+        obj.setId(id + 1)
+
         cls.objetos.append(obj)
+
         cls.salvar()
 
     @classmethod
-    def listar(cls):
+    def listar (cls):
         cls.abrir()
         return cls.objetos
     
     @classmethod
-    def listar_id(cls, id):
+    def listarId (cls, id):
         cls.abrir()
-        for x in cls.objetos:
-            if x.id == id:
-                return x
-        return None
-    
-    @classmethod
-    def atualizar(cls, obj):
-        x = cls.listar_id(obj.id)
-        if x != None:
-            cls.objetos.remove(x)
-            cls.objetos.append(obj)
-        cls.salvar()
 
+        for categoria in cls.objetos:
+            if categoria.getId() == id:
+                return categoria
+        return None
+            
     @classmethod
-    def excluir(cls, obj):
-        x = cls.listar_id(obj.id)
-        if x != None:
-            cls.objetos.remove(x)
+    def atualizar (cls, obj):
+        categoria = cls.listarId(obj.getId())
+        if categoria != None:
+            categoria.setDescricao(obj.getDescricao())
             cls.salvar()
 
     @classmethod
-    def salvar(cls):
-        with open("categorias.json", mode="w") as arquivo:
-            json.dump(cls.objetos, arquivo, default = vars)
+    def excluir (cls, obj):
+        categoria = cls.listarId(obj.getId())
+        if categoria != None:
+            cls.objetos.remove(categoria)
+            cls.salvar()
 
     @classmethod
     def abrir(cls):
         cls.objetos = []
         try:
-            with open("categorias.json", mode="r") as arquivo:
+            with open("Aula_09/Projeto_2/categorias.json", mode="r") as arquivo:
                 clientes_json = json.load(arquivo)
                 for obj in clientes_json:
-                    c = Categoria(obj["id"], obj["descricao"])
+                    c = Categoria(obj["id"], obj["d"])
                     cls.objetos.append(c)
         except FileNotFoundError:
             pass
+
+    @classmethod
+    def salvar(cls):
+        with open("Aula_09/Projeto_2/categorias.json", mode="w") as arquivo:
+            json.dump(cls.objetos, arquivo, default = vars)
