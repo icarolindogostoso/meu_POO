@@ -1,6 +1,15 @@
-from templates.manterclienteUI import ManterClienteUI
 from templates.abrircontaUI import AbrirContaUI
+from templates.adicionarprodutonocarrinhoUI import AdicionarProdutoNoCarrinhoUI
+from templates.fecharpedidoUI import FecharPedidoUI
+from templates.listarprodutosUI import ListarProdutosUI
 from templates.loginUI import LoginUI
+from templates.mantercategoriaUI import ManterCategoriaUI
+from templates.manterclienteUI import ManterClienteUI
+from templates.manterprodutoUI import ManterProdutoUI
+from templates.reajustarprodutoUI import ReajustarProdutoUI
+from templates.visualizarmeuspedidosUI import VisualizarMeusPedidosUI
+from templates.visualizarpedidosUI import VisualizarPedidosUI
+
 from view import View
 
 import streamlit as st
@@ -17,17 +26,25 @@ class IndexUI:
         op = st.sidebar.selectbox("Menu", ["Cadastro de Clientes", "Cadastro de Categorias", "Cadastro de Produtos", "Reajustar Preços", "Visualizar Pedidos"])
         if op == "Cadastro de Clientes":
             ManterClienteUI.main()
+        if op == "Cadastro de Categorias":
+            ManterCategoriaUI.main()
+        if op == "Cadastro de Produtos":
+            ManterProdutoUI.main()
+        if op == "Reajustar Preços":
+            ReajustarProdutoUI.main()
+        if op == "Visualizar Pedidos":
+            VisualizarPedidosUI.main()
 
     def menuCliente():
         op = st.sidebar.selectbox("Menu", ["Listar Produtos", "Adicionar Produto no Carrinho", "Fechar Pedido", "Ver Meus Pedidos"])
         if op == "Listar Produtos":
-            View.clienteListarProduto()
+            ListarProdutosUI.main()
         if op == "Inserir Produto no Carrinho":
-            View.clienteAdicionarProduto()
-        if op == "Comprar Carrinho":
-            View.clenteFecharPedido()
+            AdicionarProdutoNoCarrinhoUI.main()
+        if op == "Fechar Pedido":
+            FecharPedidoUI.main()
         if op == "Ver Meus Pedidos":
-            View.clienteMeusPedidos()
+            VisualizarMeusPedidosUI.main()
 
     def sairDoSistema():
         if st.sidebar.button("Sair"):
