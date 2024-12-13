@@ -2,6 +2,7 @@ from models.clientes import Cliente, Clientes
 from models.categorias import Categoria, Categorias
 from models.produtos import Produto, Produtos
 from models.vendas import Venda, Vendas
+from models.vendaitens import VendaItem, VendaItens
 
 class View:
     @staticmethod
@@ -80,9 +81,14 @@ class View:
         Produtos.excluir(c)
 
     @staticmethod
-    def produtoReajustar(percentual):
+    def produtoReajustarTodos(percentual):
         for obj in View.produtoListar():
-            View.produtoAtualizar(obj.id, obj.descricao, obj.preco * (1 + percentual), obj.estoque, obj.id_categoria)
+            View.produtoAtualizar(obj.getId(), obj.getDescricao(), obj.getPreco() * (1 + percentual), obj.getEstoque(), obj.getIdCategoria())
+
+    @staticmethod
+    def produtoReajustarEspecifico(id, percentual):
+        obj = Produtos.listarId(id)
+        View.produtoAtualizar(obj.getId(), obj.getDescricao(), obj.getPreco() * (1 + percentual), obj.getEstoque(), obj.getIdCategoria())
 
     @staticmethod
     def vendaInserir(carrinho, total, id_cliente):
@@ -106,3 +112,21 @@ class View:
                 data = venda.getData()
                 v = Venda(id, data, carrinho, total, id_cliente)
                 Vendas.atualizar(v)
+
+    @staticmethod
+    def vendaListar():
+        return Vendas.listar()
+    
+    @staticmethod
+    def vendaAtualizar(id, data, carrinho, total, id_cliente):
+        v = Venda(id, data, carrinho, total, id_cliente)
+        Vendas.atualizar(v)
+    
+    @staticmethod
+    def vendaItemInserir(quantidade, preco, id_venda, id_produto):
+        v = VendaItem(0, quantidade, preco, id_venda, id_produto)
+        VendaItens.inserir(v)
+
+    @staticmethod
+    def vendaItemListar():
+        return VendaItens.listar()

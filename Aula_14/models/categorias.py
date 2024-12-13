@@ -6,7 +6,7 @@ class Categoria:
         self.setDescricao(d)
 
     def setId (self, id):
-        if id > 0:
+        if id >= 0:
             self.__id = id
         else:
             raise ValueError ("Id invalido")
@@ -75,15 +75,15 @@ class Categorias:
     def abrir(cls):
         cls.objetos = []
         try:
-            with open("Aula_09/Projeto_2/categorias.json", mode="r") as arquivo:
+            with open("categorias.json", mode="r") as arquivo:
                 clientes_json = json.load(arquivo)
                 for obj in clientes_json:
-                    c = Categoria(obj["id"], obj["d"])
+                    c = Categoria(obj["_Categoria__id"], obj["_Categoria__descricao"])
                     cls.objetos.append(c)
         except FileNotFoundError:
             pass
 
     @classmethod
     def salvar(cls):
-        with open("Aula_09/Projeto_2/categorias.json", mode="w") as arquivo:
+        with open("categorias.json", mode="w") as arquivo:
             json.dump(cls.objetos, arquivo, default = vars)

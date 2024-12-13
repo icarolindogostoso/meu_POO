@@ -1,15 +1,15 @@
 import json
 
 class VendaItem:
-    def __init__ (self, id, q, p):
+    def __init__ (self, id, q, p, iv, ip):
         self.setId(id)
         self.setQtd(q)
         self.setPreco(p)
-        self.setIdVenda()
-        self.setIdProduto()
+        self.setIdVenda(iv)
+        self.setIdProduto(ip)
 
     def setId (self, id):
-        if id > 0:
+        if id >= 0:
             self.__id = id
         else:
             raise ValueError ("Id invalido")
@@ -26,11 +26,11 @@ class VendaItem:
         else:
             raise ValueError ("Preco invalido")
         
-    def setIdVenda(self):
-        self.__idVenda = 0
+    def setIdVenda(self, iv):
+        self.__idVenda = iv
 
-    def setIdProduto (self):
-        self.__idProduto = 0
+    def setIdProduto (self, ip):
+        self.__idProduto = ip
 
     def getId (self):
         return self.__id
@@ -102,15 +102,15 @@ class VendaItens:
     def abrir(cls):
         cls.objetos = []
         try:
-            with open("Aula_09/Projeto_2/vendaitens.json", mode="r") as arquivo:
+            with open("vendaitens.json", mode="r") as arquivo:
                 produtos_json = json.load(arquivo)
                 for obj in produtos_json:
-                    c = VendaItem(obj["id"], obj["q"], obj["p"])
+                    c = VendaItem(obj["_VendaItem__id"], obj["_VendaItem__qtd"], obj["_VendaItem__preco"], obj["_VendaItem__idVenda"], obj["_VendaItem__idProduto"])
                     cls.objetos.append(c)
         except FileNotFoundError:
             pass
 
     @classmethod
     def salvar (cls):
-        with open("Aula_09/Projeto_2/vendaitens.json", mode="w") as arquivo:
+        with open("vendaitens.json", mode="w") as arquivo:
             json.dump(cls.objetos, arquivo, default=vars)

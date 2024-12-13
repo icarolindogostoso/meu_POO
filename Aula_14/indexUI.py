@@ -40,7 +40,7 @@ class IndexUI:
         op = st.sidebar.selectbox("Menu", ["Listar Produtos", "Adicionar Produto no Carrinho", "Fechar Pedido", "Ver Meus Pedidos"])
         if op == "Listar Produtos":
             ListarProdutosUI.main()
-        if op == "Inserir Produto no Carrinho":
+        if op == "Adicionar Produto no Carrinho":
             AdicionarProdutoNoCarrinhoUI.main()
         if op == "Fechar Pedido":
             FecharPedidoUI.main()
