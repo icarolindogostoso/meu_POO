@@ -17,7 +17,7 @@ class AdicionarProdutoNoCarrinhoUI:
                 else:
                     for venda in View.vendaListar():
                         if venda.getIdCliente() == st.session_state["clienteId"] and venda.getCarrinho() == True:
-                            View.vendaItemInserir(quantidade, op.getPreco(), venda.getId(), op.getId())
+                            View.vendaItemInserir(op.getDescricao(), quantidade, op.getPreco(), venda.getId(), op.getId())
                             View.produtoAtualizar(op.getId(), op.getDescricao(), op.getPreco(), op.getEstoque() - quantidade, op.getIdCategoria())
                             View.vendaAtualizar(venda.getId(), venda.getData(), venda.getCarrinho(), venda.getTotal() + (op.getPreco() * quantidade), venda.getIdCliente())
                             st.success("Produto adicionado ao carrinho com sucesso!")

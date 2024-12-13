@@ -123,8 +123,8 @@ class View:
         Vendas.atualizar(v)
     
     @staticmethod
-    def vendaItemInserir(quantidade, preco, id_venda, id_produto):
-        v = VendaItem(0, quantidade, preco, id_venda, id_produto)
+    def vendaItemInserir(descricao, quantidade, preco, id_venda, id_produto):
+        v = VendaItem(0, descricao, quantidade, preco, id_venda, id_produto)
         VendaItens.inserir(v)
 
     @staticmethod
