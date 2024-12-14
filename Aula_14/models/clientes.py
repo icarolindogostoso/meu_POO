@@ -15,31 +15,31 @@ class Cliente:
             raise ValueError ("Id invalido")
         
     def setNome (self, n):
-        if len(n) > 0:
+        if len(n) >= 0:
             self.__nome = n
         else:
             raise ValueError ("Nome invalido")
         
     def setEmail (self, e):
-        if len(e) > 0:
+        if len(e) >= 0:
             self.__email = e
         else:
             raise ValueError ("Email invalido")
         
     def setFone (self, f):
-        if len(f) > 0:
+        if len(f) >= 0:
             self.__fone = f
         else:
             raise ValueError ("Nome invalido")
         
     def setSenha (self, s):
-        if len(s) > 0:
+        if len(s) >= 0:
             self.__senha = s
         else:
             raise ValueError ("Senha invalida")
         
     def getSenha (self, s):
-        if len(s) > 0:
+        if len(s) >= 0:
             self.__senha = s
         else:
             raise ValueError ("Senha invalida")

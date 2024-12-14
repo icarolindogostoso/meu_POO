@@ -12,7 +12,7 @@ class Categoria:
             raise ValueError ("Id invalido")
         
     def setDescricao(self, d):
-        if len(d) > 0:
+        if len(d) >= 0:
             self.__descricao = d
         else:
             raise ValueError ("Descicao invalida")

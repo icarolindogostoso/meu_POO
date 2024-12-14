@@ -16,19 +16,19 @@ class VendaItem:
             raise ValueError ("Id invalido")
         
     def setDescricao (self, d):
-        if len(d) > 0:
+        if len(d) >= 0:
             self.__descricao = d
         else:
             raise ValueError ("Descricao invalida")
         
     def setQtd (self, q):
-        if q > 0:
+        if q >= 0:
             self.__qtd = q
         else:
             raise ValueError ("Quantidade invalida")
         
     def setPreco (self, p):
-        if p > 0:
+        if p >= 0:
             self.__preco = p
         else:
             raise ValueError ("Preco invalido")

@@ -103,8 +103,10 @@ class View:
 
     @staticmethod
     def vendaFechar(id_cliente):
+        id_venda = 0
         for venda in Vendas.listar():
             if venda.getIdCliente() == id_cliente and venda.getCarrinho() == True:
+                id_venda = venda.getId()
                 id = venda.getId()
                 carrinho = False
                 total = venda.getTotal()
@@ -112,6 +114,19 @@ class View:
                 data = venda.getData()
                 v = Venda(id, data, carrinho, total, id_cliente)
                 Vendas.atualizar(v)
+                break
+        
+        for vendaitem in VendaItens.listar():
+            id_produto = 0
+            if vendaitem.getIdVenda() == id_venda:
+                id_produto = vendaitem.getIdProduto()
+
+            for produto in Produtos.listar():
+                if produto.getId() == id_produto:
+                    estoque = produto.getEstoque()
+                    estoque = estoque + vendaitem.getQtd()
+                    View.produtoAtualizar(produto.getId(), produto.getDescricao(), produto.getPreco(), estoque, produto.getIdCategoria())
+                    break
 
     @staticmethod
     def vendaListar():
@@ -135,3 +150,8 @@ class View:
     def vendaItemExcluir(id):
         v = VendaItem(id, "", 0, 0, None, None)
         VendaItens.excluir(v)
+
+    @staticmethod
+    def vendaItemAtualizar(id, descricao, quantidade, preco, id_venda, id_produto):
+        v = VendaItem(id, descricao, quantidade, preco, id_venda, id_produto)
+        VendaItens.atualizar(v)

@@ -49,8 +49,8 @@ class ManterProdutoUI:
         else:
             op = st.selectbox("Selecione o produto", produtos)
             descricao = st.text_input("Informe a descricao: ", op.getDescricao())
-            preco = st.text_input("Informe o preco: ", op.getPreco())
-            estoque = st.text_input("Informe o estoque: ", op.getEstoque())
+            preco = st.number_input("Informe o preco: ", value=op.getPreco(), step=0.01, format="%.2f")
+            estoque = st.number_input("Informe o estoque: ", value=op.getEstoque(), step=1)
             categorias = View.categoriaListar()
             op2 = st.selectbox("Selecione a categoria", categorias, key="categoria_2")
             if st.button("Atualizar"):

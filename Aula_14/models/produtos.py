@@ -15,13 +15,13 @@ class Produto:
             raise ValueError ("Id invalido")
         
     def setDescricao (self, d):
-        if len(d) > 0:
+        if len(d) >= 0:
             self.__descricao = d
         else:
             raise ValueError ("Descricao invalida")
         
     def setPreco (self, p):
-        if p > 0:
+        if p >= 0:
             self.__preco = p
         else:
             raise ValueError ("Preco invalido")

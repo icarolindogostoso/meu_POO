@@ -14,18 +14,13 @@ class FecharPedidoUI:
     def fecharPedido():
         st.header("Fechar Pedido")
         vendas = View.vendaListar()
-        for venda in vendas:
-            if venda.getIdCliente() == st.session_state["clienteId"] and venda.getCarrinho() == True:
-                pass
-            else:
-                vendas.remove(venda)
-
         if len(vendas) == 0:
             st.write("Nenhum pedido realizado")
         else:
             dic = []
             for obj in vendas:
-                dic.append(obj.__dict__)
+                if obj.getIdCliente() == st.session_state["clienteId"] and obj.getCarrinho() == True:
+                    dic.append(obj.__dict__)
             df = pd.DataFrame(dic)
             st.dataframe(df)
 
