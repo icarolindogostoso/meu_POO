@@ -17,6 +17,7 @@ class VisualizarMeusPedidosUI:
         for vendaitem in vendaItens:
             if vendaitem.getIdVenda() == id_venda:
                 valido = True
+                break
 
         if valido == False:
             st.write("Nenhum pedido realizado")

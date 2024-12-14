@@ -130,3 +130,8 @@ class View:
     @staticmethod
     def vendaItemListar():
         return VendaItens.listar()
+    
+    @staticmethod
+    def vendaItemExcluir(id):
+        v = VendaItem(id, "", 0, 0, None, None)
+        VendaItens.excluir(v)

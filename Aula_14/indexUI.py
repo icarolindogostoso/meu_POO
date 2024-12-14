@@ -1,5 +1,5 @@
 from templates.abrircontaUI import AbrirContaUI
-from templates.adicionarprodutonocarrinhoUI import AdicionarProdutoNoCarrinhoUI
+from templates.adicionarremoverprodutonocarrinhoUI import AdicionarRemoverProdutoNoCarrinhoUI
 from templates.fecharpedidoUI import FecharPedidoUI
 from templates.listarprodutosUI import ListarProdutosUI
 from templates.loginUI import LoginUI
@@ -37,11 +37,11 @@ class IndexUI:
 
     def menuCliente():
         View.vendaInserir(True, 0, st.session_state["clienteId"])
-        op = st.sidebar.selectbox("Menu", ["Listar Produtos", "Adicionar Produto no Carrinho", "Fechar Pedido", "Ver Meus Pedidos"])
+        op = st.sidebar.selectbox("Menu", ["Listar Produtos", "Adicionar / Remover Produto no Carrinho", "Fechar Pedido", "Ver Meus Pedidos"])
         if op == "Listar Produtos":
             ListarProdutosUI.main()
-        if op == "Adicionar Produto no Carrinho":
-            AdicionarProdutoNoCarrinhoUI.main()
+        if op == "Adicionar / Remover Produto no Carrinho":
+            AdicionarRemoverProdutoNoCarrinhoUI.main()
         if op == "Fechar Pedido":
             FecharPedidoUI.main()
         if op == "Ver Meus Pedidos":

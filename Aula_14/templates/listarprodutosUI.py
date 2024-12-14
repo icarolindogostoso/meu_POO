@@ -11,7 +11,6 @@ class ListarProdutosUI:
         else:
             dic = []
             for obj in produto:
-                if obj.getEstoque() > 0:
-                    dic.append(obj.__dict__)
+                dic.append(obj.__dict__)
             df = pd.DataFrame(dic)
             st.dataframe(df)
