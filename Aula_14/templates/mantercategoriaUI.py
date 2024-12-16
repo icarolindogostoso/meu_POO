@@ -31,9 +31,10 @@ class ManterCategoriaUI:
             st.dataframe(df)
 
     def inserir():
+        nome = st.text_input("Informe o nome: ")
         descricao = st.text_input("Informe a descricao: ")
         if st.button("Inserir"):
-            View.categoriaInserir(descricao)
+            View.categoriaInserir(nome, descricao)
             st.success("Categoria criada com sucesso!")
             time.sleep(2)
             st.rerun()
@@ -44,9 +45,10 @@ class ManterCategoriaUI:
             st.write("Nenhuma categoria cadastrada")
         else:
             op = st.selectbox("Selecione a categoria", categorias)
+            nome = st.text_input("Informe o nome: ", op.getNome())
             descricao = st.text_input("Informe a descricao: ", op.getDescricao())
             if st.button("Atualizar"):
-                View.categoriaAtualizar(op.getId(), descricao)
+                View.categoriaAtualizar(op.getId(), nome, descricao)
                 st.success("Categoria atualizada com sucesso!")
                 time.sleep(2)
                 st.rerun()

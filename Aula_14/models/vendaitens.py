@@ -1,9 +1,9 @@
 import json
 
 class VendaItem:
-    def __init__ (self, id, d, q, p, iv, ip):
+    def __init__ (self, id, n, q, p, iv, ip):
         self.setId(id)
-        self.setDescricao(d)
+        self.setNome(n)
         self.setQtd(q)
         self.setPreco(p)
         self.setIdVenda(iv)
@@ -15,9 +15,9 @@ class VendaItem:
         else:
             raise ValueError ("Id invalido")
         
-    def setDescricao (self, d):
+    def setNome (self, d):
         if len(d) >= 0:
-            self.__descricao = d
+            self.__nome = d
         else:
             raise ValueError ("Descricao invalida")
         
@@ -42,8 +42,8 @@ class VendaItem:
     def getId (self):
         return self.__id
     
-    def getDescricao (self):
-        return self.__descricao
+    def getNome (self):
+        return self.__nome
     
     def getQtd (self):
         return self.__qtd
@@ -58,7 +58,7 @@ class VendaItem:
         return self.__idProduto
 
     def __str__ (self):
-        return f"{self.__id} - {self.__descricao} - {self.__qtd} - {self.__preco} - {self.__idVenda} - {self.__idProduto}"
+        return f"{self.__id} - {self.__nome} - {self.__qtd} - {self.__preco} - {self.__idVenda} - {self.__idProduto}"
     
 class VendaItens:
     objetos = []
@@ -95,6 +95,7 @@ class VendaItens:
     def atualizar (cls, obj):
         vendaitem = cls.listarId(obj.getId())
         if vendaitem != None:
+            vendaitem.setNome(obj.getNome())
             vendaitem.setQtd(obj.getQtd())
             vendaitem.setPreco(obj.getPreco())
             vendaitem.setIdVenda(obj.getIdVenda())
@@ -115,7 +116,7 @@ class VendaItens:
             with open("vendaitens.json", mode="r") as arquivo:
                 produtos_json = json.load(arquivo)
                 for obj in produtos_json:
-                    c = VendaItem(obj["_VendaItem__id"], obj["_VendaItem__descricao"], obj["_VendaItem__qtd"], obj["_VendaItem__preco"], obj["_VendaItem__idVenda"], obj["_VendaItem__idProduto"])
+                    c = VendaItem(obj["_VendaItem__id"], obj["_VendaItem__nome"], obj["_VendaItem__qtd"], obj["_VendaItem__preco"], obj["_VendaItem__idVenda"], obj["_VendaItem__idProduto"])
                     cls.objetos.append(c)
         except FileNotFoundError:
             pass

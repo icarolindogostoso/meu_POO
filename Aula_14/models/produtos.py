@@ -1,8 +1,10 @@
 import json
 
 class Produto:
-    def __init__ (self, id, d, p, e, i):
+    def __init__ (self, id, f, n, d, p, e, i):
         self.setId(id)
+        self.setFoto(f)
+        self.setNome(n)
         self.setDescricao(d)
         self.setPreco(p)
         self.setEstoque(e)
@@ -13,6 +15,18 @@ class Produto:
             self.__id = id
         else:
             raise ValueError ("Id invalido")
+        
+    def setFoto (self, f):
+        if len(f) >= 0:
+            self.__foto = f
+        else:
+            raise ValueError ("Foto invalida")
+        
+    def setNome (self, n):
+        if len(n) >= 0:
+            self.__nome = n
+        else:
+            raise ValueError ("Nome invalido")
         
     def setDescricao (self, d):
         if len(d) >= 0:
@@ -38,6 +52,12 @@ class Produto:
     def getId (self):
         return self.__id
     
+    def getFoto (self):
+        return self.__foto
+    
+    def getNome (self):
+        return self.__nome
+    
     def getDescricao (self):
         return self.__descricao
     
@@ -51,7 +71,7 @@ class Produto:
         return self.__idCategoria
 
     def __str__ (self):
-        return f"{self.__id} - {self.__descricao} - {self.__preco} - {self.__estoque} - {self.__idCategoria}"
+        return f"id: {self.__id} - produto: {self.__nome} - preço: {self.__preco} - estoque: {self.__estoque}"
     
 class Produtos:
     objetos = []
@@ -89,6 +109,8 @@ class Produtos:
         produto = cls.listarId(obj.getId())
         if produto != None:
             produto.setDescricao(obj.getDescricao())
+            produto.setFoto(obj.getFoto())
+            produto.setNome(obj.getNome())
             produto.setPreco(obj.getPreco())
             produto.setEstoque(obj.getEstoque())
             produto.setIdCategoria(obj.getIdCategoria())
@@ -108,7 +130,7 @@ class Produtos:
             with open("produtos.json", mode="r") as arquivo:
                 clientes_json = json.load(arquivo)
                 for obj in clientes_json:
-                    c = Produto(obj["_Produto__id"], obj["_Produto__descricao"], obj["_Produto__preco"], obj["_Produto__estoque"], obj["_Produto__idCategoria"])
+                    c = Produto(obj["_Produto__id"], obj["_Produto__foto"], obj["_Produto__nome"], obj["_Produto__descricao"], obj["_Produto__preco"], obj["_Produto__estoque"], obj["_Produto__idCategoria"])
                     cls.objetos.append(c)
         except FileNotFoundError:
             pass

@@ -47,13 +47,13 @@ class View:
         return Categorias.listar_id(id)
     
     @staticmethod
-    def categoriaInserir(descricao):
-        c = Categoria(0, descricao)
+    def categoriaInserir(nome, descricao):
+        c = Categoria(0, nome, descricao)
         Categorias.inserir(c)
 
     @staticmethod
-    def categoriaAtualizar(id, descricao):
-        c = Categoria(id, descricao)
+    def categoriaAtualizar(id, nome, descricao):
+        c = Categoria(id, nome, descricao)
         Categorias.atualizar(c)
     
     @staticmethod
@@ -66,13 +66,13 @@ class View:
         return Produtos.listar()
     
     @staticmethod
-    def produtoInserir(descricao, preco, estoque, id_categoria):
-        c = Produto(0, descricao, preco, estoque, id_categoria)
+    def produtoInserir(foto, nome, descricao, preco, estoque, id_categoria):
+        c = Produto(0, foto, nome, descricao, preco, estoque, id_categoria)
         Produtos.inserir(c)
 
     @staticmethod
-    def produtoAtualizar(id, descricao, preco, estoque, id_categoria):
-        c = Produto(id, descricao, preco, estoque, id_categoria)
+    def produtoAtualizar(id, foto, nome, descricao, preco, estoque, id_categoria):
+        c = Produto(id, foto, nome, descricao, preco, estoque, id_categoria)
         Produtos.atualizar(c)
     
     @staticmethod
@@ -138,8 +138,8 @@ class View:
         Vendas.atualizar(v)
     
     @staticmethod
-    def vendaItemInserir(descricao, quantidade, preco, id_venda, id_produto):
-        v = VendaItem(0, descricao, quantidade, preco, id_venda, id_produto)
+    def vendaItemInserir(nome, quantidade, preco, id_venda, id_produto):
+        v = VendaItem(0, nome, quantidade, preco, id_venda, id_produto)
         VendaItens.inserir(v)
 
     @staticmethod
@@ -152,6 +152,6 @@ class View:
         VendaItens.excluir(v)
 
     @staticmethod
-    def vendaItemAtualizar(id, descricao, quantidade, preco, id_venda, id_produto):
-        v = VendaItem(id, descricao, quantidade, preco, id_venda, id_produto)
+    def vendaItemAtualizar(id, nome, quantidade, preco, id_venda, id_produto):
+        v = VendaItem(id, nome, quantidade, preco, id_venda, id_produto)
         VendaItens.atualizar(v)

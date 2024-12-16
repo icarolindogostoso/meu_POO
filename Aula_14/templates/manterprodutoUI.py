@@ -31,13 +31,15 @@ class ManterProdutoUI:
             st.dataframe(df)
 
     def inserir():
+        foto = st.text_input("Informe o link da foto: ")
+        nome = st.text_input("Informe o nome: ")
         descricao = st.text_input("Informe a descricao: ")
         preco = st.number_input("Informe o preco: ", value=0.0, step=0.01, format="%.2f") #st.text("Informe o preco: ")
         estoque = st.number_input("Informe o estoque: ", value=0, step=1)
         categorias = View.categoriaListar()
         op = st.selectbox("Selecione a categoria", categorias, key="categoria_1")
         if st.button("Inserir"):
-            View.produtoInserir(descricao, preco, estoque, op.getId())
+            View.produtoInserir(foto, nome,descricao, preco, estoque, op.getId())
             st.success("Produto criado com sucesso!")
             time.sleep(2)
             st.rerun()
@@ -48,13 +50,15 @@ class ManterProdutoUI:
             st.write("Nenhum produto cadastrado")
         else:
             op = st.selectbox("Selecione o produto", produtos)
+            foto = st.text_input("Informe o link da foto: ", op.getFoto())
+            nome = st.text_input("Informe o nome: ", op.getNome())
             descricao = st.text_input("Informe a descricao: ", op.getDescricao())
             preco = st.number_input("Informe o preco: ", value=op.getPreco(), step=0.01, format="%.2f")
             estoque = st.number_input("Informe o estoque: ", value=op.getEstoque(), step=1)
             categorias = View.categoriaListar()
             op2 = st.selectbox("Selecione a categoria", categorias, key="categoria_2")
             if st.button("Atualizar"):
-                View.produtoAtualizar(op.getId(), descricao, preco, estoque, op2.getId())
+                View.produtoAtualizar(op.getId(), foto, nome, descricao, preco, estoque, op2.getId())
                 st.success("Produto atualizado com sucesso!")
                 time.sleep(2)
                 st.rerun()

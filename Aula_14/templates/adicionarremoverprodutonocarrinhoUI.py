@@ -29,8 +29,8 @@ class AdicionarRemoverProdutoNoCarrinhoUI:
                 else:
                     for venda in View.vendaListar():
                         if venda.getIdCliente() == st.session_state["clienteId"] and venda.getCarrinho() == True:
-                            View.vendaItemInserir(op.getDescricao(), quantidade, op.getPreco(), venda.getId(), op.getId())
-                            View.produtoAtualizar(op.getId(), op.getDescricao(), op.getPreco(), op.getEstoque() - quantidade, op.getIdCategoria())
+                            View.vendaItemInserir(op.getNome(), quantidade, op.getPreco(), venda.getId(), op.getId())
+                            View.produtoAtualizar(op.getId(), op.getFoto(), op.getNome(), op.getDescricao(), op.getPreco(), op.getEstoque() - quantidade, op.getIdCategoria())
                             View.vendaAtualizar(venda.getId(), venda.getData(), venda.getCarrinho(), venda.getTotal() + (op.getPreco() * quantidade), venda.getIdCliente())
                             st.success("Produto adicionado ao carrinho com sucesso!")
                             time.sleep(2)
@@ -92,7 +92,7 @@ class AdicionarRemoverProdutoNoCarrinhoUI:
                     if obj.getId() == op.getIdProduto():
                         produto = obj
                 
-                View.produtoAtualizar(produto.getId(), produto.getDescricao(), produto.getPreco(), produto.getEstoque() + op.getQtd(), produto.getIdCategoria())
+                View.produtoAtualizar(produto.getId(), produto.getFoto(), produto.getNome(), produto.getDescricao(), produto.getPreco(), produto.getEstoque() + op.getQtd(), produto.getIdCategoria())
                 View.vendaAtualizar(venda.getId(), venda.getData(), venda.getCarrinho(), venda.getTotal() - (produto.getPreco() * op.getQtd()), venda.getIdCliente())
 
                 for obj in View.produtoListar():
@@ -102,8 +102,8 @@ class AdicionarRemoverProdutoNoCarrinhoUI:
                 if quantidade > produto.getEstoque():
                     st.error("Estoque insuficiente")
                 else:
-                    View.vendaItemAtualizar(op.getId(), op.getDescricao(), quantidade, op.getPreco(), op.getIdVenda(), op.getIdProduto())
-                    View.produtoAtualizar(produto.getId(), produto.getDescricao(), produto.getPreco(), produto.getEstoque() - quantidade, produto.getIdCategoria())
+                    View.vendaItemAtualizar(op.getId(), op.getNome(), quantidade, op.getPreco(), op.getIdVenda(), op.getIdProduto())
+                    View.produtoAtualizar(produto.getId(), produto.getFoto(), produto.getNome(), produto.getDescricao(), produto.getPreco(), produto.getEstoque() - quantidade, produto.getIdCategoria())
                     View.vendaAtualizar(venda.getId(), venda.getData(), venda.getCarrinho(), venda.getTotal() + (op.getPreco() * quantidade), venda.getIdCliente())
                     st.success("Produto atualizado no carrinho com sucesso!")
                     time.sleep(2)
