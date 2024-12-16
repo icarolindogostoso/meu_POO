@@ -4,6 +4,7 @@ from view import View
 
 class VisualizarMeusPedidosUI:
     def main():
+        st.session_state.page = "pagina1"
         st.title("Visualizar Meus Pedidos")
 
         venda = None

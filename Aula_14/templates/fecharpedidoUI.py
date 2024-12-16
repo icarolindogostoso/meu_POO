@@ -5,6 +5,7 @@ from datetime import datetime
 
 class FecharPedidoUI:
     def main():
+        st.session_state.page = "pagina1"
         tab1, tab2= st.tabs(["Fechar Pedido", "Pedidos Realizados"])
         with tab1:
             FecharPedidoUI.fecharPedido()

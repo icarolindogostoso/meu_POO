@@ -4,6 +4,7 @@ import time
 
 class AdicionarRemoverProdutoNoCarrinhoUI:
     def main():
+        st.session_state.page = "pagina1"
         tab1, tab2, tab3 = st.tabs(["Adicionar Produto", "Remover Produto Escolhido", "Atualizar Produto Escolhido"])
         with tab1:
             AdicionarRemoverProdutoNoCarrinhoUI.adicionarProdutoNoCarrinho()
