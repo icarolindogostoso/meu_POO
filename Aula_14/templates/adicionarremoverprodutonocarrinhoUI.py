@@ -62,7 +62,7 @@ class AdicionarRemoverProdutoNoCarrinhoUI:
                         produto = obj
 
                 View.vendaItemExcluir(op.getId())
-                View.produtoAtualizar(produto.getId(), produto.getDescricao(), produto.getPreco(), produto.getEstoque() + op.getQtd(), produto.getIdCategoria())
+                View.produtoAtualizar(produto.getId(), produto.getFoto(), produto.getNome(), produto.getDescricao(), produto.getPreco(), produto.getEstoque() + op.getQtd(), produto.getIdCategoria())
                 View.vendaAtualizar(venda.getId(), venda.getData(), venda.getCarrinho(), venda.getTotal() - (produto.getPreco() * op.getQtd()), venda.getIdCliente())
                 st.success("Produto removido do carrinho com sucesso!")
                 time.sleep(2)
