@@ -125,7 +125,7 @@ class View:
                 if produto.getId() == id_produto:
                     estoque = produto.getEstoque()
                     estoque = estoque + vendaitem.getQtd()
-                    View.produtoAtualizar(produto.getId(), produto.getFoto(), produto.getNome(), produto.getDescricao(), produto.getPreco(), produto.getEstoque() - quantidade, produto.getIdCategoria())
+                    View.produtoAtualizar(produto.getId(), produto.getFoto(), produto.getNome(), produto.getDescricao(), produto.getPreco(), estoque , produto.getIdCategoria())
                     break
 
     @staticmethod
