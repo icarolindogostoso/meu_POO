@@ -5,7 +5,7 @@ import time
 
 class ManterClienteUI:
     def main():
-        st.header("Manter Clientes")
+        st.title("Manter Clientes")
         tab1, tab2, tab3, tab4 = st.tabs(["Listar", "Inserir", "Atualizar", "Excluir"])
         with tab1:
             ManterClienteUI.listar()
@@ -25,11 +25,12 @@ class ManterClienteUI:
         if len(clientes) == 0:
             st.write("Nenhum cliente cadastrado")
         else:
-            dic = []
-            for obj in clientes:
-                dic.append(obj.__dict__)
-            df = pd.DataFrame(dic)
-            st.dataframe(df)
+            for cliente in clientes:
+                with st.container(border=True):
+                    st.header(f"{cliente.getId()}. {cliente.getNome()}")
+                    st.subheader(f"Email: {cliente.getEmail()}")
+                    st.write(f"Fone: {cliente.getFone()} - Senha: {cliente.getSenha()}")
+
 
     def inserir():
         nome = st.text_input("Informe o nome: ")

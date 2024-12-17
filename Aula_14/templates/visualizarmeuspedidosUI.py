@@ -1,5 +1,5 @@
 import streamlit as st
-import pandas as pd
+from streamlit_extras.stylable_container import stylable_container
 from view import View
 
 class VisualizarMeusPedidosUI:
@@ -29,11 +29,20 @@ class VisualizarMeusPedidosUI:
                         break
 
                 if vendaitem.getIdVenda() == venda.getId():
-                    with st.container(border=True):
-                        col1, col2 = st.columns(2)
-                        with col1:
-                            st.image(produto.getFoto(), width=500)
-                        with col2:
-                            st.header(f"Produto: {vendaitem.getNome()}")
-                            st.write(f"Preço: R$ {vendaitem.getPreco():.2f}")
-                            st.write(f"Quantidade: {vendaitem.getQtd()}")
+                    with stylable_container(
+                                key = "container",
+                                css_styles = '''
+                                img{
+                                    width: 350px;   /* Largura específica */
+                                    height: 250px;
+                                }
+                                '''
+                            ):
+                        with st.container(border=True):
+                            col1, col2 = st.columns(2)
+                            with col1:
+                                st.image(produto.getFoto(), width=500)
+                            with col2:
+                                st.header(f"Produto: {vendaitem.getNome()}")
+                                st.write(f"Preço: R$ {vendaitem.getPreco():.2f}")
+                                st.write(f"Quantidade: {vendaitem.getQtd()}")

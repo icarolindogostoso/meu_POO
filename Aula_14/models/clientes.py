@@ -54,7 +54,7 @@ class Cliente:
         return self.__email
     
     def getFone (self):
-        return self.__nome
+        return self.__fone
     
     def getSenha (self):
         return self.__senha

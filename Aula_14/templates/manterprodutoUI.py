@@ -1,5 +1,5 @@
 import streamlit as st
-import pandas as pd
+from streamlit_extras.stylable_container import stylable_container
 from view import View
 import time
 
@@ -24,12 +24,25 @@ class ManterProdutoUI:
         if len(produtos) == 0:
             st.write("Nenhum produto cadastrado")
         else:
-            dic = []
-            for obj in produtos:
-                dic.append(obj.__dict__)
-            df = pd.DataFrame(dic)
-            st.dataframe(df)
-
+            for produto in produtos:
+                with stylable_container(
+                                key = "container",
+                                css_styles = '''
+                                img{
+                                    width: 350px;   /* Largura específica */
+                                    height: 250px;
+                                }
+                                '''
+                            ):
+                    with st.container(border=True):
+                        col1, col2 = st.columns(2)
+                        with col1:
+                            st.image(produto.getFoto(), width=500)
+                        with col2:
+                            st.header(f"{produto.getId()}. {produto.getNome()}")
+                            st.write(f"Descrição: {produto.getDescricao()}")
+                            st.write(f"Preco: {produto.getPreco()} - Estoque: {produto.getEstoque()}")
+                    
     def inserir():
         foto = st.text_input("Informe o link da foto: ")
         nome = st.text_input("Informe o nome: ")

@@ -1,11 +1,10 @@
 import streamlit as st
-import pandas as pd
 from view import View
 import time
 
 class ManterCategoriaUI:
     def main():
-        st.header("Manter Categorias")
+        st.title("Manter Categorias")
         tab1, tab2, tab3, tab4 = st.tabs(["Listar", "Inserir", "Atualizar", "Excluir"])
         with tab1:
             ManterCategoriaUI.listar()
@@ -24,11 +23,11 @@ class ManterCategoriaUI:
         if len(categorias) == 0:
             st.write("Nenhuma categoria cadastrada")
         else:
-            dic = []
-            for obj in categorias:
-                dic.append(obj.__dict__)
-            df = pd.DataFrame(dic)
-            st.dataframe(df)
+            for caterogia in categorias:
+                with st.container(border=True):
+                    st.header(f"{caterogia.getId()}. {caterogia.getNome()}")
+                    st.write(f"Descrição: {caterogia.getDescricao()}")
+
 
     def inserir():
         nome = st.text_input("Informe o nome: ")
