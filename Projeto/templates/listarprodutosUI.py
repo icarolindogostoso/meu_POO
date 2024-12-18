@@ -80,12 +80,15 @@ class ListarProdutosUI:
                         st.write(f"Estoque: {produto.getEstoque()} - Preco: {produto.getPreco()}")
                         quantidade = st.number_input("Informe a quantidade: ", value=0, step=1, key="quantidade")
                         if st.button("Comprar", key="comprar"):
-                            for venda in View.vendaListar():
-                                if venda.getIdCliente() == st.session_state["clienteId"] and venda.getCarrinho() == True:
-                                    View.vendaItemInserir(produto.getNome(), quantidade, produto.getPreco(), venda.getId(), produto.getId())
-                                    View.produtoAtualizar(produto.getId(), produto.getFoto(), produto.getNome(), produto.getDescricao(), produto.getPreco(), produto.getEstoque() - quantidade, produto.getIdCategoria())
-                                    View.vendaAtualizar(venda.getId(), venda.getData(), venda.getCarrinho(), venda.getTotal() + (produto.getPreco() * quantidade), venda.getIdCliente())
-                                    st.success("Produto adicionado ao carrinho com sucesso!")
-                                    time.sleep(2)
-                                    st.rerun()
-                                    st.session_state.page = "pagina1"
+                            if quantidade <= 0:
+                                st.error("Quantidade invalida")
+                            else:
+                                for venda in View.vendaListar():
+                                    if venda.getIdCliente() == st.session_state["clienteId"] and venda.getCarrinho() == True:
+                                        View.vendaItemInserir(produto.getNome(), quantidade, produto.getPreco(), venda.getId(), produto.getId())
+                                        View.produtoAtualizar(produto.getId(), produto.getFoto(), produto.getNome(), produto.getDescricao(), produto.getPreco(), produto.getEstoque() - quantidade, produto.getIdCategoria())
+                                        View.vendaAtualizar(venda.getId(), venda.getData(), venda.getCarrinho(), venda.getTotal() + (produto.getPreco() * quantidade), venda.getIdCliente())
+                                        st.success("Produto adicionado ao carrinho com sucesso!")
+                                        time.sleep(2)
+                                        st.rerun()
+                                        st.session_state.page = "pagina1"
