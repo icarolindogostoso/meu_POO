@@ -86,7 +86,7 @@ class Categorias:
     def abrir(cls):
         cls.objetos = []
         try:
-            with open("categorias.json", mode="r") as arquivo:
+            with open("Projeto/categorias.json", mode="r") as arquivo:
                 clientes_json = json.load(arquivo)
                 for obj in clientes_json:
                     c = Categoria(obj["_Categoria__id"], obj["_Categoria__nome"], obj["_Categoria__descricao"])
@@ -96,5 +96,5 @@ class Categorias:
 
     @classmethod
     def salvar(cls):
-        with open("categorias.json", mode="w") as arquivo:
+        with open("Projeto/categorias.json", mode="w") as arquivo:
             json.dump(cls.objetos, arquivo, default = vars)

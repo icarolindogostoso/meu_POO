@@ -83,12 +83,12 @@ class View:
     @staticmethod
     def produtoReajustarTodos(percentual):
         for obj in View.produtoListar():
-            View.produtoAtualizar(obj.getId(), obj.getDescricao(), obj.getPreco() * (1 + percentual), obj.getEstoque(), obj.getIdCategoria())
+            View.produtoAtualizar(obj.getId(), obj.getFoto(), obj.getNome(), obj.getDescricao(), obj.getPreco() * (1 + percentual), obj.getEstoque(), obj.getIdCategoria())
 
     @staticmethod
     def produtoReajustarEspecifico(id, percentual):
         obj = Produtos.listarId(id)
-        View.produtoAtualizar(obj.getId(), obj.getDescricao(), obj.getPreco() * (1 + percentual), obj.getEstoque(), obj.getIdCategoria())
+        View.produtoAtualizar(obj.getId(), obj.getFoto(), obj.getNome(), obj.getDescricao(), obj.getPreco() * (1 + percentual), obj.getEstoque(), obj.getIdCategoria())
 
     @staticmethod
     def vendaInserir(carrinho, total, id_cliente):

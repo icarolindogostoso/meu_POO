@@ -121,7 +121,7 @@ class Clientes:
     def abrir(cls):
         cls.objetos = []
         try:
-            with open("clientes.json", mode="r") as arquivo:
+            with open("Projeto/clientes.json", mode="r") as arquivo:
                 clientes_json = json.load(arquivo)
                 for obj in clientes_json:
                     c = Cliente(obj["_Cliente__id"], obj["_Cliente__nome"], obj["_Cliente__email"], obj["_Cliente__fone"], obj["_Cliente__senha"])
@@ -131,5 +131,5 @@ class Clientes:
 
     @classmethod
     def salvar(cls):
-        with open("clientes.json", mode="w") as arquivo:
+        with open("Projeto/clientes.json", mode="w") as arquivo:
             json.dump(cls.objetos, arquivo, default = vars)

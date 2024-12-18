@@ -38,10 +38,13 @@ class ManterClienteUI:
         fone = st.text_input("Informe o fone: ")
         senha = st.text_input("Informe a senha: ", type="password")
         if st.button("Inserir"):
-            View.clienteInserir(nome, email, fone, senha)
-            st.success("Cliente criado com sucesso!")
-            time.sleep(2)
-            st.rerun()
+            if nome == "" or email == "" or fone == "" or senha == "":
+                st.error("Parametro inválido")
+            else:
+                View.clienteInserir(nome, email, fone, senha)
+                st.success("Cliente criado com sucesso!")
+                time.sleep(2)
+                st.rerun()
 
     def atualizar():
         clientes = View.clienteListar()

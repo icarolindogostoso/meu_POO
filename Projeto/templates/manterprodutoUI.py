@@ -52,10 +52,13 @@ class ManterProdutoUI:
         categorias = View.categoriaListar()
         op = st.selectbox("Selecione a categoria", categorias, key="categoria_1")
         if st.button("Inserir"):
-            View.produtoInserir(foto, nome,descricao, preco, estoque, op.getId())
-            st.success("Produto criado com sucesso!")
-            time.sleep(2)
-            st.rerun()
+            if foto == "" or nome == "" or descricao == "" or preco <= 0 or estoque <= 0 or categoria == None:
+                st.error("Parametro inválido")
+            else:
+                View.produtoInserir(foto, nome,descricao, preco, estoque, op.getId())
+                st.success("Produto criado com sucesso!")
+                time.sleep(2)
+                st.rerun()
 
     def atualizar():
         produtos = View.produtoListar()

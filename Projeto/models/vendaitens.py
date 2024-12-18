@@ -113,7 +113,7 @@ class VendaItens:
     def abrir(cls):
         cls.objetos = []
         try:
-            with open("vendaitens.json", mode="r") as arquivo:
+            with open("Projeto/vendaitens.json", mode="r") as arquivo:
                 produtos_json = json.load(arquivo)
                 for obj in produtos_json:
                     c = VendaItem(obj["_VendaItem__id"], obj["_VendaItem__nome"], obj["_VendaItem__qtd"], obj["_VendaItem__preco"], obj["_VendaItem__idVenda"], obj["_VendaItem__idProduto"])
@@ -123,5 +123,5 @@ class VendaItens:
 
     @classmethod
     def salvar (cls):
-        with open("vendaitens.json", mode="w") as arquivo:
+        with open("Projeto/vendaitens.json", mode="w") as arquivo:
             json.dump(cls.objetos, arquivo, default=vars)

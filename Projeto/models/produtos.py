@@ -71,7 +71,7 @@ class Produto:
         return self.__idCategoria
 
     def __str__ (self):
-        return f"id: {self.__id} - produto: {self.__nome} - preço: {self.__preco} - estoque: {self.__estoque}"
+        return f"id: {self.__id} - produto: {self.__nome} - preço: {self.__preco:.2f} - estoque: {self.__estoque}"
     
 class Produtos:
     objetos = []
@@ -127,7 +127,7 @@ class Produtos:
     def abrir(cls):
         cls.objetos = []
         try:
-            with open("produtos.json", mode="r") as arquivo:
+            with open("Projeto/produtos.json", mode="r") as arquivo:
                 clientes_json = json.load(arquivo)
                 for obj in clientes_json:
                     c = Produto(obj["_Produto__id"], obj["_Produto__foto"], obj["_Produto__nome"], obj["_Produto__descricao"], obj["_Produto__preco"], obj["_Produto__estoque"], obj["_Produto__idCategoria"])
@@ -137,5 +137,5 @@ class Produtos:
 
     @classmethod
     def salvar(cls):
-        with open("produtos.json", mode="w") as arquivo:
+        with open("Projeto/produtos.json", mode="w") as arquivo:
             json.dump(cls.objetos, arquivo, default = vars)

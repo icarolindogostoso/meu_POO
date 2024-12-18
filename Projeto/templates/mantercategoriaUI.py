@@ -33,10 +33,13 @@ class ManterCategoriaUI:
         nome = st.text_input("Informe o nome: ")
         descricao = st.text_input("Informe a descricao: ")
         if st.button("Inserir"):
-            View.categoriaInserir(nome, descricao)
-            st.success("Categoria criada com sucesso!")
-            time.sleep(2)
-            st.rerun()
+            if nome == "" or descricao == "":
+                st.error("Parametro inválido")
+            else:
+                View.categoriaInserir(nome, descricao)
+                st.success("Categoria criada com sucesso!")
+                time.sleep(2)
+                st.rerun()
 
     def atualizar():
         categorias = View.categoriaListar()
