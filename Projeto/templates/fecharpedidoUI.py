@@ -55,12 +55,10 @@ class FecharPedidoUI:
 
     def pedidosRealizados():
         st.header("Pedidos Realizados")
-        vendas = View.vendaListar()
-        for venda in vendas:
+        vendas = []
+        for venda in View.vendaListar():
             if venda.getIdCliente() == st.session_state["clienteId"]:
-                pass
-            else:
-                vendas.remove(venda)
+                vendas.append(venda)
 
         cliente = None
         for obj in View.clienteListar():
@@ -72,7 +70,7 @@ class FecharPedidoUI:
         else:
             for i, venda in enumerate(vendas):
                 with st.container(border=True):
-                    st.header(f"Pedido {venda.getId()} de {cliente.getNome()}")
+                    st.header(f"Pedido {i} de {cliente.getNome()}")
                     st.subheader(f"Total: R$ {venda.getTotal():.2f}")
                     data = venda.getData()
                     data_obj = datetime.fromisoformat(data)
