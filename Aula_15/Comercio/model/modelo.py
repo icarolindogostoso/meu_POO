@@ -1,4 +1,3 @@
-import json
 from abc import ABC, abstractmethod
 
 class Modelo (ABC):
@@ -35,7 +34,11 @@ class Modelo (ABC):
     @classmethod
     @abstractmethod
     def atualizar (cls, obj : object):
-        pass
+        objeto = cls.listar_id(obj.getId())
+        if objeto != None:
+            cls.objetos.remove(objeto)
+            cls.objetos.append(obj)
+            cls.salvar()
 
     @classmethod
     def excluir (cls, obj : object):
@@ -45,18 +48,11 @@ class Modelo (ABC):
             cls.salvar()
 
     @classmethod
+    @abstractmethod
     def abrir(cls):
-        cls.objetos = []
-        try:
-            with open('''''', mode="r") as arquivo:
-                clientes_json = json.load(arquivo)
-                for obj in clientes_json:
-                    c = Modelo('''''')
-                    cls.objetos.append(c)
-        except FileNotFoundError:
             pass
 
     @classmethod
+    @abstractmethod
     def salvar(cls):
-        with open('''''', mode="w") as arquivo:
-            json.dump(cls.objetos, arquivo, default = vars)
+        pass
